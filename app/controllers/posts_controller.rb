@@ -2,16 +2,17 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
 
   def index
-    @posts = Post.all
+    @post_form = Post.all
   end
 
   def new
-    @post = Post.new
+    @post_form = PostForm.new
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save
+    @post_form = PostForm.new(post_form_params)
+    if @post_form.valid?
+      @post_form.save
       redirect_to root_path
     else
       render :new
@@ -30,8 +31,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def post_params
-    params.require(:post).permit(:text, :image)
+  def post_form_params
+    params.require(:post_form).permit(:text, :image)
   end
 
   def set_post
