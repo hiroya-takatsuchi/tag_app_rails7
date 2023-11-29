@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
 
   def index
-    @post_form = Post.all
+    @posts = Post.all
   end
 
   def new
